@@ -1,6 +1,7 @@
 package com.truward.jb2c.mid;
 
 import com.sun.corba.se.spi.orbutil.fsm.State;
+import com.truward.jb2c.model.PrimitiveTypeKind;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -24,16 +25,6 @@ public final class Types {
   }
 
   interface Type extends Node {
-  }
-
-  enum PrimitiveTypeKind {
-    BOOLEAN,
-    BYTE,
-    CHAR,
-    SHORT,
-    INT,
-    LONG,
-    DOUBLE
   }
 
   interface PrimitiveType extends Type {

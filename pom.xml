@@ -10,6 +10,7 @@
 
   <modules>
     <module>jb2c-cli</module>
+    <module>jb2c-core</module>
   </modules>
 
   <scm>
