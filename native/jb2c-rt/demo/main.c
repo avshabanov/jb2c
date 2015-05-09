@@ -30,7 +30,7 @@ static struct j_foo_Bar_itbl j_foo_BarImpl_itbl_j_foo_Bar_itbl = {
   &j_foo_BarImpl_method_apply
 };
  
-static void* j_foo_BarImpl_itbls[] = {
+static void * j_foo_BarImpl_itbls[] = {
   &j_foo_BarImpl_itbl_j_foo_Bar_itbl
 };
  
@@ -49,11 +49,8 @@ static struct jb2c_class_meta j_foo_BarImpl_meta = {
  */
 
 static void invoke_apply(/*interface as object*/void * obj) {
-  struct j_foo_Bar_itbl * foo_bar_itbl = (struct j_foo_Bar_itbl *) jb2c_rt_find_itbl(
-    (struct jb2c_object_base *)obj, j_foo_Bar_name);
-  int result;
-
-  result = foo_bar_itbl->apply(obj, 3);
+  JB2C_INIT_KNOWN_ITBL(j_foo_Bar_itbl, foo_bar_itbl, obj, j_foo_Bar_name);
+  int result = foo_bar_itbl->apply(obj, 3);
   fprintf(stdout, "foo.apply(3) = %d\n", result);
 }
 

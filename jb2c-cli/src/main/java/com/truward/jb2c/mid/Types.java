@@ -1,6 +1,5 @@
 package com.truward.jb2c.mid;
 
-import com.sun.corba.se.spi.orbutil.fsm.State;
 import com.truward.jb2c.model.PrimitiveTypeKind;
 
 import javax.annotation.Nonnull;

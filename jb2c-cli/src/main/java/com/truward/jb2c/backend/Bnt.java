@@ -19,20 +19,21 @@ public class Bnt {
     default R visitPackage(@Nonnull Package node) { return visitNode(node); }
     default R visitClassType(@Nonnull ClassType node) { return visitNode(node); }
     default R visitVar(@Nonnull Var node) { return visitNode(node); }
+    default R visitMethod(@Nonnull Method node) { return visitNode(node); }
   }
 
-  public static abstract class Node {
-    abstract <R> R apply(@Nonnull Visitor<R> v);
+  public interface Node {
+    <R> R apply(@Nonnull Visitor<R> v);
   }
 
-  public static abstract class Type extends Node {
+  public interface Type extends Node {
   }
 
-  public static final class Var extends Node {
-    @Override <R> R apply(@Nonnull Visitor<R> v) { return v.visitVar(this); }
+  public static final class Var implements Node {
+    @Override public <R> R apply(@Nonnull Visitor<R> v) { return v.visitVar(this); }
   }
 
-  public static final class Package extends Node {
+  public static final class Package implements Node {
     public final Package parent;
     public final String name;
 
@@ -41,12 +42,12 @@ public class Bnt {
       this.name = name;
     }
 
-    @Override <R> R apply(@Nonnull Visitor<R> v) {
+    @Override public <R> R apply(@Nonnull Visitor<R> v) {
       return v.visitPackage(this);
     }
   }
 
-  public static final class ClassType extends Type {
+  public static final class ClassType implements Type {
     public final Node parent;
     public final String name;
 
@@ -66,13 +67,17 @@ public class Bnt {
     public <R> R apply(@Nonnull Visitor<R> visitor) { return visitor.visitClassType(this); }
   }
 
-  public static final class PrimitiveType extends Type {
+  public static final class PrimitiveType implements Type {
     final PrimitiveTypeKind kind;
 
     public PrimitiveType(PrimitiveTypeKind kind) {
       this.kind = kind;
     }
 
-    @Override <R> R apply(@Nonnull Visitor<R> v) { return v.visitPrimitiveType(this); }
+    @Override public <R> R apply(@Nonnull Visitor<R> v) { return v.visitPrimitiveType(this); }
+  }
+
+  public static final class Method implements Node {
+    @Override public <R> R apply(@Nonnull Visitor<R> v) { return v.visitMethod(this); }
   }
 }
