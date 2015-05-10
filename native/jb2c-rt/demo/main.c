@@ -48,7 +48,7 @@ static struct jb2c_class_meta j_foo_BarImpl_meta = {
  * invoke method
  */
 
-static void invoke_apply(/*interface as object*/void * obj) {
+static void invoke_apply(void * obj) {
   JB2C_INIT_KNOWN_ITBL(j_foo_Bar_itbl, foo_bar_itbl, obj, j_foo_Bar_name);
   int result = foo_bar_itbl->apply(obj, 3);
   fprintf(stdout, "foo.apply(3) = %d\n", result);
